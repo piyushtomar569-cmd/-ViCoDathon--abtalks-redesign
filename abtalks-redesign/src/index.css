@@ -1,0 +1,348 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+@theme {
+  --color-base: #0a0a0f;
+  --color-surface: #111118;
+  --color-surface2: #181820;
+  --color-border: #292934;
+
+  --color-brand-400: #a78bfa;
+  --color-brand-500: #8b5cf6;
+  --color-brand-600: #7c3aed;
+
+  --color-flame-400: #ff9f43;
+  --color-flame-500: #ff6b35;
+  --color-flame-600: #f4511e;
+
+  --animate-fadeUp: fadeUp 0.6s cubic-bezier(.16,1,.3,1) both;
+  --animate-popIn: popIn 0.35s cubic-bezier(.34,1.56,.64,1) both;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-flicker: flicker 1.5s ease-in-out infinite;
+  --animate-pulseRing: pulseRing 1.8s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.75); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(18px, -22px) scale(1.06); }
+  66% { transform: translate(-14px, 12px) scale(0.96); }
+}
+
+@keyframes flicker {
+  0%, 100% { transform: scale(1) rotate(-2deg); }
+  50% { transform: scale(1.06) rotate(2deg); }
+}
+
+@keyframes pulseRing {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.35); }
+  50% { box-shadow: 0 0 0 10px rgba(255, 107, 53, 0); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmerSweep {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes emberRise {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.9; }
+  100% { transform: translateY(-46px) translateX(var(--drift, 6px)) scale(0.3); opacity: 0; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes checkPop {
+  0% { transform: scale(0.4) rotate(-20deg); opacity: 0; }
+  60% { transform: scale(1.25) rotate(6deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes ringPulse {
+  0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.45); }
+  70% { box-shadow: 0 0 0 14px rgba(139, 92, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(18px) scale(0.99); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@keyframes confettiFall {
+  0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) translateX(var(--drift, 0px)) rotate(var(--spin, 360deg)); opacity: 0; }
+}
+
+@keyframes underlineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes shakeX {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(7px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(3px); }
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0a0a0f;
+  font-family: 'Poppins', sans-serif;
+  overscroll-behavior-y: contain;
+}
+
+::-webkit-scrollbar { display: none; }
+* { scrollbar-width: none; }
+
+.font-display {
+  font-family: 'Space Grotesk', 'Poppins', sans-serif;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #ff9f43, #ff6b35, #a78bfa, #ff9f43);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 6s ease infinite;
+}
+
+.shimmer-bg {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  background-size: 200% 100%;
+}
+
+.shimmer-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-sweep::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.14) 40%, rgba(255,255,255,0.14) 45%, transparent 65%);
+  background-size: 250% 100%;
+  animation: shimmerSweep 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  animation: floatSlow 9s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Reveal-on-scroll: elements start hidden and are flipped visible via
+   the .is-visible class added by the useReveal hook. */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.press {
+  transition: transform 0.15s ease;
+}
+.press:active {
+  transform: scale(0.94);
+}
+
+.hover-lift {
+  transition: transform 0.25s cubic-bezier(.16,1,.3,1), border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 107, 53, 0.35);
+  box-shadow: 0 12px 30px -12px rgba(255, 107, 53, 0.25);
+}
+
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+}
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.35), transparent 30%);
+  animation: spinSlow 3.2s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.btn-glow:hover::before {
+  opacity: 1;
+}
+.btn-glow > * {
+  position: relative;
+}
+
+.underline-grow {
+  transform-origin: left;
+  animation: underlineGrow 0.6s cubic-bezier(.16,1,.3,1) both;
+}
+
+.stagger > * { opacity: 0; }
+.stagger > *:nth-child(1) { animation: fadeUp .5s ease forwards .05s; }
+.stagger > *:nth-child(2) { animation: fadeUp .5s ease forwards .15s; }
+.stagger > *:nth-child(3) { animation: fadeUp .5s ease forwards .25s; }
+.stagger > *:nth-child(4) { animation: fadeUp .5s ease forwards .35s; }
+.stagger > *:nth-child(5) { animation: fadeUp .5s ease forwards .45s; }
+
+.page-enter {
+  animation: pageEnter 0.5s cubic-bezier(.16,1,.3,1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* =========================
+   ABTalks theme system
+   ========================= */
+:root {
+  --app-bg: #0a0a0f;
+  --app-surface: #111118;
+  --app-surface2: #181820;
+  --app-border: #292934;
+  --app-text: #ffffff;
+  --app-muted: #9ca3af;
+  --app-muted-strong: #d1d5db;
+}
+
+.theme-light {
+  --app-bg: #f6f7fb;
+  --app-surface: #ffffff;
+  --app-surface2: #eef0f5;
+  --app-border: #dfe3eb;
+  --app-text: #171923;
+  --app-muted: #667085;
+  --app-muted-strong: #344054;
+}
+
+body {
+  background: var(--app-bg);
+  color: var(--app-text);
+  transition: background-color .35s ease, color .35s ease;
+}
+
+.theme-light .bg-base { background-color: var(--app-bg) !important; }
+.theme-light .bg-surface { background-color: var(--app-surface) !important; }
+.theme-light .bg-surface2 { background-color: var(--app-surface2) !important; }
+.theme-light .border-border { border-color: var(--app-border) !important; }
+.theme-light .text-white { color: var(--app-text) !important; }
+.theme-light .text-gray-200 { color: var(--app-muted-strong) !important; }
+.theme-light .text-gray-300 { color: #475467 !important; }
+.theme-light .text-gray-400 { color: var(--app-muted) !important; }
+.theme-light .text-gray-500 { color: #667085 !important; }
+.theme-light .text-gray-600 { color: #98a2b3 !important; }
+.theme-light .placeholder\:text-gray-600::placeholder { color: #98a2b3 !important; }
+.theme-light .bg-white { background-color: #171923 !important; }
+.theme-light .text-base { color: var(--app-text) !important; }
+
+.theme-light .shimmer-sweep::after {
+  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,.55) 40%, rgba(255,255,255,.55) 45%, transparent 65%);
+}
+
+.theme-light .theme-toggle {
+  box-shadow: 0 4px 16px rgba(16,24,40,.08);
+}
+
+.theme-light .blob {
+  opacity: .35;
+}
+
+@media (min-width: 768px) {
+  .page-enter {
+    transform-origin: center top;
+  }
+}
+
+/* =========================
+   Theme-aware translucent surfaces
+   -------------------------
+   Tailwind's opacity-modifier utilities (e.g. bg-base/80) bake the
+   opacity into a fixed color-mix at build time, so the manual
+   .theme-light overrides above (which only target the plain
+   .bg-base / .bg-surface classes) never reach them. That left the
+   header and bottom nav permanently dark after switching to light
+   mode. These classes read the live --app-* theme variables instead,
+   so they always track the current theme.
+   ========================= */
+.navbar-header {
+  background-color: color-mix(in srgb, var(--app-bg) 82%, transparent);
+}
+.navbar-bottom {
+  background-color: color-mix(in srgb, var(--app-surface) 90%, transparent);
+}
+.notif-btn {
+  background-color: var(--app-surface2);
+  transition: background-color 0.2s ease;
+}
+.notif-btn:hover {
+  background-color: color-mix(in srgb, var(--app-surface2) 70%, transparent);
+}
+.cta-secondary-hover:hover {
+  background-color: color-mix(in srgb, var(--app-surface2) 80%, transparent) !important;
+}
+
+@media (max-width: 480px) {
+  .theme-toggle {
+    padding: .35rem;
+  }
+
+  .theme-toggle span:last-child {
+    display: none;
+  }
+}
